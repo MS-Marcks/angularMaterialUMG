@@ -1,0 +1,141 @@
+<form [formGroup]="DetallleForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>DETALLE FACTURA</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="!this.eliminar; else elseTemplate1">
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <input matInput placeholder="ID PRODUCTO" formControlName="producto_id">
+            </mat-form-field>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="OnBuscarProducto()"  type="button">BUSCAR</button>
+            </mat-card-actions>
+          </div>
+          <div class="col">
+            <mat-form-field >
+              <input matInput placeholder="CANTIDAD" formControlName="cantidad">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field >
+              <input matInput placeholder="CREADO POR" formControlName="creado_por">
+            </mat-form-field>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate1>
+        <div class="row text-center">
+          <div class="col">
+            <strong>
+              {{mensajeEliminar}}
+            </strong>
+          </div>
+        </div>
+      </ng-template>
+    </mat-card-content>
+    <ng-container *ngIf="this.cancelar; else elseTemplate">
+      <div class="row">
+        <div class="col-sm 6">
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="btn-block" type="submit">{{mensaje}}</button>
+          </mat-card-actions>
+        </div>
+        <div class="col-sm-6">
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="btn-block" (click)="OnCancelar()" type="button">CANCELAR</button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="btn-block" type="submit">{{mensaje}}</button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </ng-template>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="btn-block" (click)="OnTerminar()" type="button">TERMINAR FACTURA</button>
+        </mat-card-actions>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-6">
+        Producto:<strong>{{producto.nombre}}</strong>, Precio: <strong>{{producto.precio}}</strong>
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h1>{{meessage}}</h1>
+      </div>
+    </div>
+  </mat-card>
+</form>
+<br>
+
+<ng-container *ngIf="OnCargar(); else elseTemplate2">
+  <div class="mat-elevation-z8">
+    <table mat-table class="full-width-table"  [dataSource]="dataSource" matSort aria-label="Elements">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
+        <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+        <td mat-cell *matCellDef="let row">{{row.cantidad}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="subtotal">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sub Total</th>
+        <td mat-cell *matCellDef="let row">{{row.subtotal}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="creado_por">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Creado Por</th>
+        <td mat-cell *matCellDef="let row">{{row.creado_por}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="eliminar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Eliminar</th>
+        <td mat-cell *matCellDef="let row"><button mat-raised-button color="primary"  (click)="OnEliminar(row)" type="submit">ELIMINAR</button></td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+  </div>
+
+
+</ng-container>
+<ng-template #elseTemplate2>
+  <div class="row">
+    <div class="col-sm-12">
+      <center>
+        <mat-spinner></mat-spinner>
+      </center>
+    </div>
+  </div>
+</ng-template>
+
+
