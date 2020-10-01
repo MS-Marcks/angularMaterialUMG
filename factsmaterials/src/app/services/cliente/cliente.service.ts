@@ -9,7 +9,7 @@ import { Factura } from './../../models/factura/factura';
   providedIn: 'root'
 })
 export class ClienteService {
-  private URI = 'https://apirestmaterial.herokuapp.com/api/';
+  private URI = 'http://localhost:3000/api/';
   constructor(private httpClient: HttpClient) { }
 
   /*getFacturas(id): Observable<Factura[]>{

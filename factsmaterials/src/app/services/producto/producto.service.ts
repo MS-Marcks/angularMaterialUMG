@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductoService {
 
-  private URI = 'https://apirestmaterial.herokuapp.com/api/';
+  private URI = 'http://localhost:3000/api/';
   constructor(private httpClient: HttpClient) { }
 
   getproducto(id): Observable<Producto>{

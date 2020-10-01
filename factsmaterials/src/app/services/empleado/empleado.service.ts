@@ -8,7 +8,7 @@ import { Empleado } from './../../models/empleado/empleado';
 })
 export class EmpleadoService {
 
-  private URI = 'https://apirestmaterial.herokuapp.com/api/';
+  private URI = 'http://localhost:3000/api/';
   constructor(private httpClient: HttpClient) { }
 
   getEmpleadoSingle(id): Observable<Empleado>{

@@ -8,7 +8,7 @@ import { DetalleFacturaProducto } from './../../models/factura/detallefacturaPro
   providedIn: 'root'
 })
 export class FacturaService {
-  private URI = 'https://apirestmaterial.herokuapp.com/api/';
+  private URI = 'http://localhost:3000/api/';
   constructor(private httpClient: HttpClient) { }
 
   postFactura(element): Observable<any> {
