@@ -65,8 +65,7 @@ export class FacturaComponent implements OnInit {
         this.serviceFactura.postFactura(this.FacturaGroup.value).subscribe(
           (res) => {
             this.meessage = res;
-            this.cliente = undefined;
-            this.empleado = undefined;
+
             this.Get();
             this.OnCancelar();
           }
@@ -79,8 +78,7 @@ export class FacturaComponent implements OnInit {
         this.serviceFactura.updateFactura(this.FacturaGroup.value).subscribe(
           (res) => {
             this.meessage = res;
-            this.cliente = undefined;
-            this.empleado = undefined;
+
             this.Get();
             this.OnCancelar();
           }
@@ -93,8 +91,6 @@ export class FacturaComponent implements OnInit {
       this.serviceFactura.deleteFactura(this.id).subscribe(
         (res) => {
           this.meessage = res;
-          this.cliente = undefined;
-          this.empleado = undefined;
           this.Get();
           this.OnCancelar();
         }
@@ -116,6 +112,20 @@ export class FacturaComponent implements OnInit {
     this.cancelar = false;
     this.eliminar = false;
     this.mensajeEliminar = '';
+    this.cliente = {
+      id: undefined,
+      nombre: undefined,
+      direccion: undefined,
+      nit: undefined,
+      creado_por: undefined
+    };
+    this.empleado = {
+      id: undefined,
+      nombre: undefined,
+      salario: undefined,
+      creado_por: undefined,
+      codigo: undefined
+    };
   }
   OnEliminar(element): void {
     this.id = element.id;
